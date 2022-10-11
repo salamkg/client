@@ -22,6 +22,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   fileData: any;
   fileToEdit: any
   classDn: string = 'dn'
+  refresh: any
 
   constructor(
     private route: ActivatedRoute,
@@ -42,10 +43,18 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
     this.getFiles()
     this.getFilesForSlider()
+    this.onRefresh(this.refresh)
   }
 
   onCloseModal(close: boolean) {
     this.showModal = close;
+  }
+
+  onRefresh(refresh: any) {
+    this.refresh = refresh === 'refresh'
+    if (this.refresh === true) {
+      this.ngOnInit()
+    }
   }
   
   triggerClick() {

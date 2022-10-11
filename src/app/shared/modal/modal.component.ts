@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit {
 
   @Input() fileToModal: any;
   @Output() closeModal = new EventEmitter<any>()
+  @Output() refresh = new EventEmitter<any>()
   showModal = false;
 
   constructor(
@@ -46,13 +47,11 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.file)
     this.form.disable()
-    console.log(this.form)
     this.fileUploadService.editFile(this.fileToModal.id, this.form.value.title, this.file).subscribe(
       response => {
-        console.log(response)
         this.closeModal.emit(this.showModal)
+        this.refresh.emit('refresh')
         MaterialService.toast('Successfully updated!')
       },
       err => err

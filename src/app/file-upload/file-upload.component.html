@@ -42,7 +42,8 @@
 <app-modal 
     fileData
     [fileToModal]="fileToEdit"
-    (closeModal)="onCloseModal($event)" 
+    (closeModal)="onCloseModal($event)"
+    (refresh)="onRefresh($event)" 
     (update)="onEdit(file)"
     *ngIf="showModal"
     >
