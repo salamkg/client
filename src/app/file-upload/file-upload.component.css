@@ -1,0 +1,25 @@
+.dropme {
+  width: 100%;
+  height: 200px;
+  padding: 2rem;
+  text-align: center;
+  border: dashed 2px #abbefe;
+  position: relative;
+  margin: 0 auto;
+}
+
+.dn {
+  display: none;
+}
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}

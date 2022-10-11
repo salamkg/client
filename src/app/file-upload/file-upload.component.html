@@ -1,0 +1,49 @@
+<div class="dropme">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 40px;">
+        <input type="file" class="dn" #input (change)="onFileUpload($event)">
+        <!-- <input formControlName="title" type="text" id="title" name="title"> -->
+        <button 
+            [disabled]="form.disabled"
+            (click)="triggerClick()" 
+            type="button"
+            class="btn waves-effect waves-light btn-large"
+            >Upload<i class="material-icons right">upload</i>
+        </button>
+    </form>
+</div>
+<app-file-slider *ngFor="let file of files$" [filesToSlider]="file"></app-file-slider>
+
+<table class="table" *ngIf="data$ | async as files">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col" colspan="2" style="text-align: center;">Actions</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let file of files">
+    <tr *ngFor="let f of file; let i = index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ f.title }}</td>
+        <td style="width: 150px; text-align: right;">
+            <button class="btn waves-effect waves-light" style="z-index: 0;" (click)="openModal(f)">
+                Edit
+            </button>
+        </td>
+        <td style="width: 150px; text-align: left;">
+        <button class="btn waves-effect waves-light red" style="z-index: 0;" (click)="onDelete(f.id)">
+            Delete
+        </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<app-modal 
+    fileData
+    [fileToModal]="fileToEdit"
+    (closeModal)="onCloseModal($event)" 
+    (update)="onEdit(file)"
+    *ngIf="showModal"
+    >
+</app-modal>
